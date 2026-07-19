@@ -2,6 +2,9 @@
 A character reference sheet generator that utilizes FLUX.2 Klein 4B as the backend.
 
 ## Make sure to put your Hugging Face token to download_flux.py and run it first
+```
+python download_flux.py
+```
 
 ## Usage
 
