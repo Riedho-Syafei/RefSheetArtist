@@ -6,13 +6,19 @@ A character reference sheet generator that utilizes FLUX.2 Klein 4B as the backe
 ## Usage
 
 ### Fresh generation
+'''
 python refsheet_artist.py --name "My character" --prompt "My character description..."
 python refsheet_artist.py --name "Orange Tabby Blacksmith" --prompt "a stocky orange tabby..."
+'''
 
 ### Fix just one bad view against an existing saved project
+'''
 python refsheet_artist.py --name "My character" --regenerate-view side
 python refsheet_artist.py --name "Orange Tabby Blacksmith" --regenerate-view side
+'''
 
-## Just rebuild the sheet image (e.g. after tweaking compositor.py's cell size) — no generation at all
+### Just rebuild the sheet image (e.g. after tweaking compositor.py's cell size) — no generation at all
+'''
 python refsheet_artist.py --name "My character" --recomposite-only
 python refsheet_artist.py --name "Orange Tabby Blacksmith" --recomposite-only
+'''
