@@ -8,7 +8,7 @@ A character reference sheet generator that utilizes FLUX.2 Klein 4B as the backe
 ### Fresh generation
 ```
 python refsheet_artist.py --name "My character" --prompt "My character description..."
-python refsheet_artist.py --name "Orange Tabby Blacksmith" --prompt "a stocky orange tabby..."
+python refsheet_artist.py --name "Orange Tabby Blacksmith" --prompt "a stocky orange tabby cat-person blacksmith, exactly one scar, located only on the upper left arm, no other scars or wounds anywhere on the body, empty paws, holding nothing, no weapons, no tools, wears a leather apron, semi-realistic style"
 ```
 
 ### Fix just one bad view against an existing saved project
