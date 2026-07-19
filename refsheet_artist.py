@@ -31,6 +31,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+from canonical_picker import pick_canonical_interactive
 from compositor import compose_reference_sheet
 from consistency_controller import (
     DEFAULT_VIEW_PLAN,
@@ -53,16 +54,28 @@ def generate_full_sheet(
     base_prompt: str,
     manager: ProjectManager,
     view_plan: list[ViewSpec] = DEFAULT_VIEW_PLAN,
+    interactive_pick: bool = True,
 ) -> None:
     """Runs the full pipeline for a new character: canonical -> reference
-    chain -> composite -> save."""
+    chain -> composite -> save.
+
+    interactive_pick: when True (default), saves all canonical candidates
+    to disk, opens them, and asks you to choose one. When False, picks the
+    first candidate automatically — useful for scripted/automated runs
+    (e.g. tests) where nothing can respond to an input() prompt.
+    """
     pipeline = RefSheetPipeline()
     controller = ConsistencyController(pipeline, base_prompt)
 
     front_spec = view_plan[0]
     candidates = controller.generate_canonical(front_spec)
-    # Placeholder selection — swap for a UI picker or auto-scorer later.
-    controller.lock_canonical(candidates[0])
+
+    if interactive_pick:
+        candidates_dir = manager.project_dir(character_name) / "candidates"
+        chosen = pick_canonical_interactive(candidates, out_dir=candidates_dir, view_name=front_spec.name)
+    else:
+        chosen = candidates[0]
+    controller.lock_canonical(chosen)
 
     for view_spec in view_plan[1:]:
         controller.generate_view(view_spec)
@@ -135,6 +148,11 @@ def main() -> None:
         action="store_true",
         help="Skip generation entirely, just rebuild the sheet from saved views",
     )
+    parser.add_argument(
+        "--no-interactive-pick",
+        action="store_true",
+        help="Auto-pick the first canonical candidate instead of asking you to choose",
+    )
     args = parser.parse_args()
 
     manager = ProjectManager(projects_root=Path(args.projects_dir))
@@ -150,7 +168,10 @@ def main() -> None:
     if not args.prompt:
         parser.error("--prompt is required unless using --regenerate-view or --recomposite-only")
 
-    generate_full_sheet(args.name, args.prompt, manager)
+    generate_full_sheet(
+        args.name, args.prompt, manager,
+        interactive_pick=not args.no_interactive_pick,
+    )
 
 
 if __name__ == "__main__":
