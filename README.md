@@ -1,5 +1,5 @@
 # RefSheetArtist
-A character reference sheet generator that utilizes FLUX.2 Klein 4B as the backend.
+A character reference sheet generator that utilizes FLUX.2 Klein 4B as the backend. Works on 16 GB RAM and 8 GB VRAM (NVIDIA GPU).
 
 ## Make sure to put your Hugging Face token to download_flux.py and run it first
 ```
