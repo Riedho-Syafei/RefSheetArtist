@@ -1,0 +1,1 @@
+C:\AI\models\Nova-Animal-XL\novaAnimalXL_ilV120.safetensors
