@@ -1,5 +1,21 @@
 # RefSheetArtist
-A character reference sheet generator that utilizes FLUX.2 Klein 4B as the backend. Works on 16 GB RAM and 8 GB VRAM (NVIDIA GPU).
+A character reference sheet generator that utilizes FLUX.2 Klein 4B and SDXL as the backends. Works on 16 GB RAM and 8 GB VRAM (NVIDIA GPU).
+
+## What's new at version 2.0
+
+### Choosing your backend
+```
+--backend flux
+--backend sdxl
+```
+
+### Negative prompt insertion (for SDXL backend) to the negative prompt file in config folder
+```
+--negative-prompt-prepend "This will be inserted at the beginning of the negative prompt in config folder"
+--negative-prompt-append "This will be inserted at the end of the negative prompt in config folder"
+```
+
+---
 
 ## Make sure to put your Hugging Face token to download_flux.py and run it first
 ```
